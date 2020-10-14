@@ -1,13 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <bcm2835.h>
+#ifndef BCM2835_H_
+#define BCM2835_H_
 
-#include"bcm2835Driver.h"
-
-#ifndef ARDUINO_H
-#define ARDUINO_H
-
-int bcm2835_inicializa();
+void bcm2835_ligarResistor(int ligar);
+void bcm2835_ligarVentoinha(int ligar);
+void bcm2835_inicializa();
 void bcm2835_desliga();
 
-#endif /* ARDUINO_H */
+#endif /* BCM2835_H_ */

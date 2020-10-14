@@ -1,6 +1,10 @@
 #include "bme280.h"
 
+#include "BME280_driver/bme280Driver.h"
+
 #define NUMERO_VALORES_PARA_MEDIA 10
+
+struct identifier identificador;
 
 struct identifier {
     /* Variável que contém o endereço do dispositivo */
@@ -84,11 +88,9 @@ float stream_sensor_data_normal_mode(struct bme280_dev *dev) {
     rslt = bme280_set_sensor_settings(settings_sel, dev);
     rslt = bme280_set_sensor_mode(BME280_NORMAL_MODE, dev);
 
-    float temperatura;
-
     /* Espera 1 segundo para realizar a medição */
-    dev->delay_us(1000000, dev->intf_ptr);
-    rslt = bme280_get_sensor_data(BME280_ALL, &comp_data, dev);
+    dev->delay_us(100000, dev->intf_ptr);
+    rslt = bme280_get_sensor_data(BME280_TEMP, &comp_data, dev);
     if (rslt != BME280_OK) {
         fprintf(stderr, "Erro ao transmitir dados do sensor (código: %+d).\n", rslt);
         exit(1);
@@ -99,26 +101,11 @@ float stream_sensor_data_normal_mode(struct bme280_dev *dev) {
 
 float bme280_requisitaTemperaturaExterna() {
     struct bme280_dev dispositivo;
-    struct identifier identificador;
+    
     float temperatura;
-
     int8_t rslt = BME280_OK;
 
-    char i2cInterface[] = "/dev/i2c-1";
-
-    if ((identificador.fd = open(i2cInterface, O_RDWR)) < 0) {
-        fprintf(stderr, "Erro ao abrir o barramento i2c %s\n", i2cInterface);
-        exit(1);
-    }
-
-    /* ME280_I2C_ADDR_PRIM : Referente ao endereço 0x76 */
-    identificador.enderecoDispositivo = BME280_I2C_ADDR_PRIM;
-
-    if (ioctl(identificador.fd, I2C_SLAVE, identificador.enderecoDispositivo) < 0) {
-        fprintf(stderr, "Erro ao acessar o barramento e/ou se comunicar com o dispositivo.\n");
-        exit(1);
-    }
-
+    
     /* Interface I2C */
     dispositivo.intf = BME280_I2C_INTF;
     dispositivo.read = user_i2c_read;
@@ -131,11 +118,27 @@ float bme280_requisitaTemperaturaExterna() {
     /* Inicializa a bme280 */
     rslt = bme280_init(&dispositivo);
     if (rslt != BME280_OK) {
-        fprintf(stderr, "Erro ao inicializar o dispositivo (código: %+d).\n", rslt);
-        exit(1);
+        printf("erro init\n");
+
+        return -1;
     }
 
     temperatura = stream_sensor_data_normal_mode(&dispositivo);
 
     return temperatura;
+}
+
+void bme280_inicializa() {
+    char i2cInterface[] = "/dev/i2c-1";
+
+    if ((identificador.fd = open(i2cInterface, O_RDWR)) < 0) {
+        exit(1);
+    }
+
+    /* ME280_I2C_ADDR_PRIM : Referente ao endereço 0x76 */
+    identificador.enderecoDispositivo = BME280_I2C_ADDR_PRIM;
+
+    if (ioctl(identificador.fd, I2C_SLAVE, identificador.enderecoDispositivo) < 0) {
+        exit(1);
+    }
 }

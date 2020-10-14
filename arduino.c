@@ -56,7 +56,7 @@ float arduino_requisitaTemperaturaInterna() {
     float temperatura;
 
     uart0_filestream = openUART();
-    char mensagem[] = {161, 3, 1, 4, 3};
+    char mensagem[] = {161, 3, 1, 4, 3, '\0'};
     escreverUART(uart0_filestream, mensagem);
     usleep(100000);
     temperatura = lerUART(uart0_filestream);
@@ -71,7 +71,7 @@ float arduino_requisitaTemperaturaPotenciometro() {
     float temperatura;
 
     uart0_filestream = openUART();
-    char mensagem[] = {162, 3, 1, 4, 3};
+    char mensagem[] = {162, 3, 1, 4, 3, '\0'};
     escreverUART(uart0_filestream, mensagem);
     usleep(100000);
     temperatura = lerUART(uart0_filestream);

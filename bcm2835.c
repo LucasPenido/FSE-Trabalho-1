@@ -1,7 +1,8 @@
 #include "bcm2835.h"
+#include "bcm2835Driver.h"
 
-#define RESISTOR RPI_V2_GPIO_P1_23
-#define VENTOINHA RPI_V2_GPIO_P1_24
+#define RESISTOR RPI_V2_GPIO_P1_16
+#define VENTOINHA RPI_V2_GPIO_P1_18
 
 void configura_pinos() {
     bcm2835_gpio_fsel(RESISTOR, BCM2835_GPIO_FSEL_OUTP);
@@ -21,7 +22,7 @@ void bcm2835_desliga() {
     exit(0);
 }
 
-int bcm2835_inicializa() {
+void bcm2835_inicializa() {
     if (!bcm2835_init()) {
         exit(1);
     }

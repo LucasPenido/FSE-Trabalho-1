@@ -4,11 +4,11 @@
 #include <fcntl.h>   //Used for UART
 #include <termios.h> //Used for UART
 
-#ifndef ARDUINO_H
-#define ARDUINO_H
+#ifndef ARDUINO_H_
+#define ARDUINO_H_
 
 float arduino_requisitaTemperaturaInterna();
 
 float arduino_requisitaTemperaturaPotenciometro();
 
-#endif /* ARDUINO_H */
+#endif /* ARDUINO_H_ */

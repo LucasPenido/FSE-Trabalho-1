@@ -8,11 +8,10 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "BME280_driver/bme280Driver.h"
-
 #ifndef BME280_H_
 #define BME280_H_
 
 float bme280_requisitaTemperaturaExterna();
+void bme280_inicializa();
 
 #endif /* BME280_H_ */
