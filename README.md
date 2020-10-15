@@ -16,9 +16,13 @@ Execute:
 
 `make` 
 
-Após a criação do executável
+Após a criação do executável:
 
 `make run`
+
+Para limpar o projeto:
+
+`make clean`
 
 Obs: Os dados serão armazenados no arquivo "dados_temperatura.csv" na mesma pasta.
 

@@ -10,9 +10,10 @@ SRC = $(wildcard $(SRCDIR)/*.c)
 OBJ = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
 EXE = bin/bin
 
-all: clean $(EXE) 
+all: $(EXE) 
     
 $(EXE): $(OBJ) 
+	@mkdir -p bin
 	$(CC) $(LDFLAGS) $(OBJDIR)/*.o $(LDLIBS) -o $@ 
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
