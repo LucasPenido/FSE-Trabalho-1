@@ -181,14 +181,14 @@ void defineDataHoraAtual(char **dataHora) {
 void *gravaTemperaturas() {
     char *dataHora;
 
-    FILE *file = fopen("temp.csv", "w");
+    FILE *file = fopen("dados_temperatura.csv", "w");
     fprintf(file, "DataHora, TI, TE, TR\n");
     fclose(file);
 
     while (1) {
         pthread_mutex_lock(&gravarArquivoMutex);
         pthread_cond_wait(&gravarArquivoCond, &gravarArquivoMutex);
-        file = fopen("temp.csv", "a");
+        file = fopen("dados_temperatura.csv", "a");
         defineDataHoraAtual(&dataHora);
         fprintf(file, "%s,%0.2lf,%0.2lf,%0.2lf\r\n", dataHora, temperaturaInterna, temperaturaExterna, temperaturaDefinida);
         fclose(file);

@@ -1,6 +1,6 @@
 #include "bme280.h"
 
-#include "BME280_driver/bme280Driver.h"
+#include "bme280Driver.h"
 
 #define NUMERO_VALORES_PARA_MEDIA 10
 
@@ -101,11 +101,10 @@ float stream_sensor_data_normal_mode(struct bme280_dev *dev) {
 
 float bme280_requisitaTemperaturaExterna() {
     struct bme280_dev dispositivo;
-    
+
     float temperatura;
     int8_t rslt = BME280_OK;
 
-    
     /* Interface I2C */
     dispositivo.intf = BME280_I2C_INTF;
     dispositivo.read = user_i2c_read;

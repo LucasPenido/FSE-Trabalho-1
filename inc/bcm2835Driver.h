@@ -8,8 +8,8 @@
  */
 
 /* Defines for BCM2835 */
-#ifndef BCM2835_H
-#define BCM2835_H
+#ifndef BCM2835Driver_H_
+#define BCM2835Driver_H_
 
 #include <stdint.h>
 
@@ -675,4 +675,4 @@ extern void bcm2835_pwm_set_data(uint8_t channel, uint32_t data);
 }
 #endif
 
-#endif /* BCM2835_H */
+#endif /* BCM2835Driver_H_ */
