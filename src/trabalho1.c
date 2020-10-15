@@ -58,22 +58,20 @@ void definirTemperaturaUsuario() {
 void definirHisterese() {
     float histereseUsuario = 0;
     system("clear");
-    printf("0 - Para voltar ao menu anterior\n");
     printf("Digite uma histerese: ");
     scanf("%f", &histereseUsuario);
     system("clear");
 
-    if (histereseUsuario > 0) {
-        histerese = histereseUsuario;
-    }
+    histerese = histereseUsuario;
 }
 
 int menu() {
     int op;
     system("clear");
     if (lerTemperaturaPotenciometro) {
-        printf("Lendo temperatura do potenciômetro\n\n");
+        printf("Lendo temperatura do potenciômetro\n");
     }
+    printf("Histerese definida em: ºC %0.2f\n\n", histerese);
     printf("1 - Definir uma temperatura\n");
     printf("2 - Ler a temperatura do potenciômetro\n");
     printf("3 - Definir Histerese\n");
