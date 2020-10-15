@@ -1,7 +1,26 @@
-all: clean atividade2    
+CC = gcc
+LDFLAGS = 
+LDLIBS = -lpthread -lbcm2835 -lwiringPi
+BLDDIR = .
+INCDIR = $(BLDDIR)/inc
+SRCDIR = $(BLDDIR)/src
+OBJDIR = $(BLDDIR)/obj
+CFLAGS = -c -Wall -I$(INCDIR)
+SRC = $(wildcard $(SRCDIR)/*.c)
+OBJ = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
+EXE = bin/bin
 
-atividade2:
-	gcc -Wall ./BME280_driver/bme280Driver.c bme280.c arduino.c lcd.c lcdDriver.c bcm2835.c trabalho1.c -I ./BME280_driver/ -o trabalho1 -lncurses -lpthread -lbcm2835 -lwiringPi
+all: clean $(EXE) 
+    
+$(EXE): $(OBJ) 
+	$(CC) $(LDFLAGS) $(OBJDIR)/*.o $(LDLIBS) -o $@ 
+
+$(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	-rm -f trabalho1
+	-rm -f $(OBJDIR)/*.o $(EXE)
+
+run:
+	bin/bin
