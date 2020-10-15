@@ -21,3 +21,12 @@ Após a criação do executável
 `./trabalho1`
 
 Obs: Os dados serão armazenados no arquivo "dados_temperatura.csv" na mesma pasta.
+
+### Grárfico Temperatura x Tempo
+![gráfico](https://i.imgur.com/fLGPVIH.png)
+
+### Resistor ligado
+![resistor](https://i.imgur.com/K0VMBqv.png)
+
+### Ventoinha ligada
+![ventoinha](https://i.imgur.com/2P2FeQW.png)
