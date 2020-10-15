@@ -18,7 +18,7 @@ Execute:
 
 Após a criação do executável
 
-`./trabalho1`
+`make run`
 
 Obs: Os dados serão armazenados no arquivo "dados_temperatura.csv" na mesma pasta.
 
