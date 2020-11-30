@@ -1,36 +1,27 @@
-# Trabalho 1 - FSE - Controle de Temperatura de Ambiente Controlado
+# Trabalho 1 - FSE - Controle de Sistema de Wifi e GPIO
 aluno: Lucas Penido Antunes  
 matrícula: 16/0013143
 
-Repositório com a solução do trabalho 1.
+Repositório com a solução do trabalho 3.
 
 ## Projeto
 
-O Projeto consiste em realizar o controle de temperatura de um ambiente fechado. Para isso foram utilizados os sensores de temperatura: Sensor LM35 para temperatura interna e Sensor BME280 (I2C) para medição de temperatura externa.
+Este trabalho tem por objetivo a familiarização com o framework de desenvolvimento ESP-IDF para a programação do ESP32-Dev-Kit. Mais especificamente o controle do sistema de Wifi juntamente com o acionamento da GPIO.
 
-Para uma maior descrição do projeto visitar este [GitLab](https://gitlab.com/fse_fga/projetos/projeto-1).
+Para uma maior descrição do projeto visitar este [GitLab](https://gitlab.com/fse_fga/projetos/projeto-3).
 
-### Executando o programa
+### Configurando o programa
 
-Execute:  
+Para configurar o Wifi execute o comando:  
 
-`make` 
+`idf.py menuconfig` 
 
-Após a criação do executável:
+Após o menu abrir selecione a opção "Configuração do Wifi" e configure o SSID e a senha. Depois na opção "Configuração das Chaves das APIs" configure a chave da API do [IpStack](https://ipstack.com/) e a chave da API da [Open Weather Map](https://openweathermap.org/api).  
 
-`make run`
+Após todas as configurações serem feitas rode o seguinte comando para dar o build no projeto.
 
-Para limpar o projeto:
+`idf.py build`
 
-`make clean`
+Após feita a build do projeto, rode o seguinte comando para enviar o progama para a ESP32 e monitorá-lo. Trocando (PORT) para a porta que a ESP32 está conectada:
 
-Obs: Os dados serão armazenados no arquivo "dados_temperatura.csv" na mesma pasta.
-
-### Grárfico Temperatura x Tempo
-![gráfico](https://i.imgur.com/fLGPVIH.png)
-
-### Resistor ligado
-![resistor](https://i.imgur.com/K0VMBqv.png)
-
-### Ventoinha ligada
-![ventoinha](https://i.imgur.com/2P2FeQW.png)
+`idf.py -p (PORT) flash monitor`
